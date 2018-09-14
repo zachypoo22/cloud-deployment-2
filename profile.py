@@ -12,7 +12,7 @@ request = portal.context.makeRequestRSpec()
 
 node1 = request.XenVM("node-1")
 node1.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
-node1.routable_control_ip = "true"
+node1.routable_control_ip = True
 
 iface1 = node1.addInterface("if1")
 iface1.component_id = "eth1"

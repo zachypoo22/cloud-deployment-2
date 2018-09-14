@@ -7,7 +7,7 @@ Wait for the profile instance to start, then click on the node in the topology a
 """
 
 import geni.portal as portal
-import geni.rspec.pg as rspec
+import geni.rspec.pg as pg
 
 request = portal.context.makeRequestRSpec()
 

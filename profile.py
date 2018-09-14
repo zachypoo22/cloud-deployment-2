@@ -5,47 +5,22 @@ This particular profile is a simple example of using a single raw PC. It can be 
 Instructions:
 Wait for the profile instance to start, then click on the node in the topology and choose the `shell` menu item. 
 """
-"""
-# Import the Portal object.
-import geni.portal as portal
-# Import the ProtoGENI library.
-import geni.rspec.pg as pg
 
-# Create a portal context.
-pc = portal.Context()
-
-# Create a Request object to start building the RSpec.
-request = pc.makeRequestRSpec()
- 
-# Add a raw PC to the request.
-node = request.XenVM("node0")
-
-# use centos
-node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
-
-#get a routable IP
-node.routable_control_ip = True
-
-# Install and execute a script that is contained in the repository.
-node.addService(pg.Execute(shell="sh", command="/local/repository/silly.sh"))
-
-# Print the RSpec to the enclosing page.
-pc.printRequestRSpec(request)
-"""
-
-# ---- try two
 import geni.portal as portal
 import geni.rspec.pg as rspec
 
-# Create a Request object to start building the RSpec.
 request = portal.context.makeRequestRSpec()
-# Create a XenVM
-node = request.XenVM("node")
-node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
-node.routable_control_ip = True
 
-node.addService(rspec.Execute(shell="/bin/sh",
-                              command="/local/repository/silly.sh"))
+for i in range(1, 5):
+ node = request.XenVm("node-%d" % i)
+ 
 
-# Print the RSpec to the enclosing page.
+ node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
+
+ iface = node.addInterface("if1")
+ iface.addAddress(pg.IPv4Address("192.168.1.%d" % i, "255.255.255.0"))
+
+ if (i == 1):
+  node.routable_control_ip = True
+
 portal.context.printRequestRSpec()

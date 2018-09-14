@@ -12,7 +12,7 @@ import geni.rspec.pg as rspec
 request = portal.context.makeRequestRSpec()
 
 for i in range(1, 5):
- node = request.XenVm("node-%d" % i)
+ node = request.XenVM("node-%d" % i)
  
 
  node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"

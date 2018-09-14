@@ -1,3 +1,9 @@
+"""Part 2 of Lab 1
+
+Instructions:
+Wait for the profile instance to start
+"""
+
 import geni.portal as portal
 import geni.rspec.pg as pg
 
